@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display:flex;
+    flex-direction: column;
+    margin:auto;
+    width: 300px;">
+        <label>Tag:</label>
+        <input type="text" id="tag" placeholder="image">
+        <label>Value:</label>
+        <input type="text" id="value" placeholder="src=............">
+        <label>Attr:</label>
+        <input type="text" id="attr"placeholder="AttributeName : AttributeValue">
+<div id="up"></div>
+<div>
+    <button onclick="up()">Up</button>
+    <button onclick="down()">Down</button>
+</div>
+<div id="down"></div>
+</div>
+
+    <script>
+        function create (prop){
+            const tagInfo=document.getElementById("tag").value
+            const valueInfo=document.getElementById("value").value
+            const attrInfo=document.getElementById("attr").value
+
+            const para = document.createElement(`${tagInfo}`);
+            const node = document.createTextNode(`${valueInfo}`);
+            para.appendChild(node);
+
+            const splitAttr=  attrInfo.split(":")
+            para.style.cssText += `${splitAttr[0]}:${splitAttr[1]}` 
+
+            const splitValue=  valueInfo.split("=")
+            para.setAttribute(`${splitValue[0]}`,`${splitValue[1]}`)
+
+            const element = document.getElementById(prop);
+            element.innerHTML = null
+            element.appendChild(para);
+            console.log(para);
+        }
+
+        function up() {
+             create("up")
+     
+        }
+
+        function down() {
+            create("down")
+        }
+    </script>
+</body>
+</html>
